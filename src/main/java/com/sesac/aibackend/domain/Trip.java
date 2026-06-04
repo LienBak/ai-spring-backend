@@ -9,9 +9,8 @@ import lombok.*;
 @Builder
 public class Trip {
 
-    private Long id;
-    private String name;
-    private String title;
+    private Long userId;
+    private String userName;
     private String departure;
     private String destination;
 }

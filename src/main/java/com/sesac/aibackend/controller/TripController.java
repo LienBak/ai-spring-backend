@@ -38,7 +38,7 @@ public class TripController {
     @PostMapping
     public ResponseEntity<TripResponse> create(@Valid @RequestBody TripRequest req) {
         long id = sequence.getAndIncrement();
-        Trip saved = Trip.builder().id(id).name(req.name()).destination(req.destination()).build();
+        Trip saved = Trip.builder().userId(id).userName(req.userName()).departure(req.departure()).destination(req.destination()).build();
         storage.put(id, saved);
         return ResponseEntity.created(URI.create("/trips/" + id)).body(TripResponse.from(saved));
     }
@@ -49,7 +49,8 @@ public class TripController {
         if(existing == null){
             throw NotFoundException.of("trip", id);
         }
-        existing.setName(req.name());
+        existing.setUserName(req.userName());
+        existing.setDeparture(req.departure());
         existing.setDestination(req.destination());
         return TripResponse.from(existing);
     }
@@ -61,7 +62,5 @@ public class TripController {
         }
         return ResponseEntity.noContent().build();
     }
-
-
 
 }

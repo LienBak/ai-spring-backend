@@ -6,10 +6,12 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
 public record TripRequest(
-        @NotBlank String name,
+        @NotBlank String userName,
+        @NotBlank String departure,
         @NotBlank String destination
+
         ) {
     public Trip toEntity() {
-        return Trip.builder().name(name).destination(destination).build();
+        return Trip.builder().userName(userName).departure(departure).destination(destination).build();
     }
 }
