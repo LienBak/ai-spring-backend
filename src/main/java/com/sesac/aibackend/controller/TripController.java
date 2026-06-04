@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
-@RequestMapping
+@RequestMapping("/trips")
 public class TripController {
 
     private final Map<Long, Trip> storage = new ConcurrentHashMap<>();
@@ -40,7 +40,7 @@ public class TripController {
         long id = sequence.getAndIncrement();
         Trip saved = Trip.builder().id(id).name(req.name()).destination(req.destination()).build();
         storage.put(id, saved);
-        return ResponseEntity.created(URI.create("/legacy/trips/" + id)).body(TripResponse.from(saved));
+        return ResponseEntity.created(URI.create("/trips/" + id)).body(TripResponse.from(saved));
     }
 
     @PutMapping("/{id}")
